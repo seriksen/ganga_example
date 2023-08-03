@@ -1,0 +1,175 @@
+#########################################################
+# 
+# Title: Po212
+# Author: Sam Eriksen
+# Date: August 2023
+#
+# Description:
+# Macro to run Po212 decays in the Outer Detector
+#
+# Environment variables:
+# OUTPUT_DIR
+# OUTPUT_FILENAME
+# SEED
+# NBEAMON
+# 
+#########################################################
+/run/verbose       0
+/control/verbose   0
+/tracking/verbose  0
+#########################################################
+# IO
+#########################################################
+/Bacc/io/enableRootOutput 0
+/Bacc/io/enableBinaryOutput 1
+/control/getEnv OUTPUT_DIR
+/Bacc/io/outputDir {OUTPUT_DIR}
+/control/getEnv OUTPUT_FILENAME
+/Bacc/io/outputName {OUTPUT_FILENAME}
+/Bacc/io/alwaysRecordPrimary true
+/Bacc/io/updateFrequency  1
+#########################################################
+# Set Record Levels
+#########################################################
+/Bacc/detector/recordLevel LiquidXenonTarget 5
+/Bacc/detector/recordLevel BottomGridHolder 5
+/Bacc/detector/recordLevel ReverseFieldRegion 5
+/Bacc/detector/recordLevel CathodeGridHolder 5
+/Bacc/detector/recordLevel GateGridHolder 5
+/Bacc/detector/recordLevel LiquidSkinXenon 5
+/Bacc/detector/recordLevel LiquidSkinXenonBank 5
+/Bacc/detector/recordLevel ScintillatorCenter 5
+/Bacc/detector/recordLevel InnerGaseousXenon 5
+/Bacc/detector/recordLevel AnodeGridHolder 5
+/Bacc/detector/recordLevel TopGridHolder 5
+/Bacc/detector/recordLevel GaseousSkinXenon 5
+/Bacc/detector/recordLevel GaseousSkinXenonBank 5
+/Bacc/detector/recordLevel WaterAndPMTs 5
+#########################################################
+# Physics list
+#########################################################
+/Bacc/physicsList/useOptics true
+/Bacc/physicsList/maxCereEleSteps 1000
+/Bacc/physicsList/genTimesToZero true
+/Bacc/physicsList/usePhotonEvaporation true
+/run/initialize
+/grdm/verbose      0
+#########################################################
+# Set the seed
+#########################################################
+/control/getEnv SEED
+/Bacc/randomSeed {SEED}
+#########################################################
+# Detector setup
+#########################################################
+/Bacc/detector/select LZDetector
+/LZ/gridWires off
+/Bacc/detector/update
+/Bacc/detector/useMCTruthLevels 1
+#########################################################
+# Material commands
+#########################################################
+/Bacc/materials/LXeTeflonRefl          0.973
+/Bacc/materials/LXeAbsorption          100 m
+/Bacc/materials/LXeSteelRefl           0.2
+/Bacc/materials/GXeTeflonRefl          0.85
+/Bacc/materials/GXeBlackWallRefl       0.2
+/Bacc/materials/GXeSteelRefl           0.2
+/Bacc/materials/GXeAbsorption          500 m
+/Bacc/materials/AlUnoxidizedQuartzRefl 0.9
+/Bacc/materials/GXeRayleigh            500 m
+/Bacc/materials/LXeRayleigh            0.3 m
+/Bacc/materials/QuartzAbsorption       1000 km
+/Bacc/materials/LXeTeflonReflLiner    0.98
+/Bacc/materials/LXeTeflonReflPMT      0.95
+/Bacc/materials/LXeTeflonReflPlate    0.9
+/Bacc/materials/LXeTeflonReflCables   0.1
+/Bacc/materials/LXeTeflonReflTruss    0.8
+/Bacc/materials/LXeTeflonReflBskinPMT 0.8
+/Bacc/materials/LXeTeflonReflBplate   0.9
+/Bacc/materials/LXeTeflonReflTskinPMT 0.8
+/Bacc/materials/LXeTeflonReflWeir     0.1
+/Bacc/materials/LXeTeflonReflDomePMT  0.8
+#########################################################
+# Set the Record Levels: Old BIN Format
+#########################################################
+/Bacc/detector/useMapOptical true
+#########################################################
+# Masses
+#########################################################
+/Bacc/detector/setComponentMass LiquidXenonTarget 7000 kg
+# Xe Masses
+/Bacc/detector/setComponentMass LiquidSkinXenon 1951.333 kg
+/Bacc/detector/setComponentMass GaseousSkinXenon 1.95 kg
+/Bacc/detector/setComponentMass GaseousSkinXenonBank 0.65 kg
+/Bacc/detector/setComponentMass LiquidSkinXenonBank 650.419 kg
+/Bacc/detector/setComponentMass LiquidXenonTarget 7000.410 kg
+/Bacc/detector/setComponentMass InnerGaseousXenon 2.80 kg
+/Bacc/detector/setComponentMass ReverseFieldRegion 659.457 kg
+/Bacc/detector/setComponentMass GateGridHolder 0.736 kg
+/Bacc/detector/setComponentMass CathodeGridHolder 0.976 kg
+/Bacc/detector/setComponentMass BottomGridHolder 0.736 kg
+/Bacc/detector/setComponentMass AnodeGridHolder 5.07E-03 kg
+/Bacc/detector/setComponentMass ScintillatorCenter 17300 kg
+# PMT Masses
+/Bacc/detector/setComponentMass Top_PMT_Ceramic 1.570E-02 kg
+/Bacc/detector/setComponentMass Bottom_PMT_Ceramic 1.570E-02 kg
+/Bacc/detector/setComponentMass Top_PMT_Body 1.317E-01 kg
+/Bacc/detector/setComponentMass Bottom_PMT_Body 1.317E-01 kg
+/Bacc/detector/setComponentMass Top_PMT_Base 5.661E-03 kg
+/Bacc/detector/setComponentMass Bottom_PMT_Base 5.661E-03 kg
+/Bacc/detector/setComponentMass Dome_Skin_PMT_Body 1.267E-01 kg
+/Bacc/detector/setComponentMass Bottom_Skin_PMT_Body 1.267E-01 kg
+/Bacc/detector/setComponentMass Top_Skin_PMT_Body 2.397E-02 kg
+/Bacc/detector/setComponentMass Water_PMT_Window 1.02 kg
+/Bacc/detector/setComponentMass Water_PMT_Can 0.686 kg
+# PTFE Masses
+/Bacc/detector/setComponentMass PTFEWallsInLiquid 184.0 kg
+/Bacc/detector/setComponentMass PTFELinerLiquid 26.224 kg #Skin teflon outer liner
+/Bacc/detector/setComponentMass TopPTFELiner 5.0278 kg #Upper PMT Structure -> Trifoils, PMT sleeves etc. for top array
+/Bacc/detector/setComponentMass BottomPTFELiner 1.3527 kg #Lower PMT Structure -> Trifoils  for bottom array
+/Bacc/detector/setComponentMass BottomXeSkinPTFELiner 66.7273 kg #Lower PMT Structure -> Dome skin PODs etc. pointing into skin dome
+/Bacc/detector/setComponentMass TopSkinIceCubeTray 10.565 kg #This is *not* in the backgrounds table. Going to assume the same specs as TopPTFELiner
+# Cryostat Masses
+/Bacc/detector/setComponentMass InnerTitaniumVessel 800 kg
+/Bacc/detector/setComponentMass OuterTitaniumVessel 1022 kg
+/Bacc/detector/setComponentMass TitaniumLegs 454 kg
+/Bacc/detector/setComponentMass FoamInsulation 13.781 kg
+/Bacc/detector/setComponentMass AluminumSealantInInnerVesselFlange 7.37E-01 kg #(Al+Iconel+Niconic) The following are guesses,
+/Bacc/detector/setComponentMass ElastomerSealantInInnerVesselFlange 2.29E-01 kg  #using the previous ratio of masses to divide
+/Bacc/detector/setComponentMass ElastomerSealantInOuterVesselUpperFlange 5.74E-01 kg #up mass from backgrounds table
+/Bacc/detector/setComponentMass ElastomerSealantInOuterVesselBottomFlange 5.74E-01 kg
+/Bacc/detector/setComponentMass BoltsInInnerVesselFlange 23 kg #Bolts take on all 53.44 kg of Stainless Steel...
+/Bacc/detector/setComponentMass BoltsInOuterVesselUpperFlange 15.22 kg
+/Bacc/detector/setComponentMass BoltsInOuterVesselBottomFlange 15.22 kg
+# Truss Masses - these absorb everything for lower/upper PMT structure, including PTFE mass that is separately used for PTFEAlphaN
+/Bacc/detector/setComponentMass BottomTruss 53.625 kg
+/Bacc/detector/setComponentMass TopTruss 115.143 kg
+# Conduit Mass - using this to represent the entire Xe recirculation tubing
+/Bacc/detector/setComponentMass BottomConduit 14.09 kg
+# Outer Detector Masses
+/Bacc/detector/setComponentMass ScintillatorTank 3164 kg #Acrylic + Displacement Foam
+/Bacc/detector/setComponentMass SteelLegs 1100 kg
+# Field Ring Masses
+/Bacc/detector/setComponentMass ForwardFieldRing 1.3464 kg
+/Bacc/detector/setComponentMass ReverseFieldRing 1.35 kg
+# Grid Holder Masses
+/Bacc/detector/setComponentMass AnodePhysGrid 19.94 kg
+/Bacc/detector/setComponentMass BottomPhysGrid 11.5 kg
+/Bacc/detector/setComponentMass CathodePhysGrid 17.9 kg
+/Bacc/detector/setComponentMass GatePhysGrid 33.35 kg
+# HV Conduit Masses
+/Bacc/detector/setComponentMass HVConduitVacuumInnerSteelCone 7.70 kg  #Going again by the ratio of inner to outer cones in the TDR macro
+/Bacc/detector/setComponentMass HVConduitInnerOuterSteelCone 121.30 kg  #Going again by the ratio of inner to outer cones in the TDR macro
+/Bacc/detector/setComponentMass HVConduitInnerConeInnerStructure 14.87 kg
+/Bacc/detector/setComponentMass HVHolePTFELinerLiquid 0.905 kg
+#########################################################
+# Sources
+#########################################################
+/Bacc/source/set ScintillatorCenter SingleDecay_212_84 1 mBq/kg
+#########################################################
+# Start simulation
+#########################################################
+/control/getEnv NBEAMON
+/Bacc/beamOn {NBEAMON}
+exit
