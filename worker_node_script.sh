@@ -41,7 +41,7 @@ ls
 # Run Command for BACCARAT
 run_command="source /cvmfs/lz.opensciencegrid.org/BACCARAT/release-${BACCARAT_VERSION}/x86_64-centos7-gcc8-opt/setup.sh;
              sv_execute -m performance_${SEED}.json BACCARATExecutable ${MACRO};
-             mkdir -p ${RESULT_DIR};
+             mkdir -p ${RESULTS_DIR};
              cp performance_${SEED}.json ${RESULTS_DIR}/performance_${SEED}.json;"
 
 # Now write the run command, this is a bit of a hack to get things working correctly

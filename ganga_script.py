@@ -11,10 +11,10 @@ particle = 'po212'
 baccarat_version = '6.3.3'
 results_dir = '/global/cfs/projectdirs/lz/users/seriksen/LZ/ganga_example/results/BACCARAT_{0}/{1}'.format(baccarat_version,
                                                                                                            particle)
-job_type = 'local' # 'slurm' or 'local'
+job_type = 'slurm' # 'slurm' or 'local'
 
 n_jobs = 10
-start_seed = 6000
+start_seed = 7000
 splitter_env_vals = []
 for i in range(start_seed, start_seed + n_jobs):
     variable_dict = {'BACCARAT_VERSION': baccarat_version,
